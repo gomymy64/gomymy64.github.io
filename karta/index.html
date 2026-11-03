@@ -1,0 +1,1132 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>10 инструментов для Claude · Мастодонт</title>
+<meta name="description" content="10 бесплатных инструментов для Claude и за что на каждом платят. Кто платит и путь от нуля до первых денег.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Onest:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js"}}</script>
+<style>
+:root {
+  --velvet: #0A0A0A;
+  --velvet-2: #121114;
+  --gold: #F2DB82;
+  --gold-deep: #B69442;
+  --hair: rgba(242, 219, 130, .22);
+  --hair-strong: rgba(242, 219, 130, .45);
+  --text: #ECEAE4;
+  --muted: #ABA697;
+  --paper: #F5F5F2;
+  --ink: #141414;
+  --ink-2: #4A473F;
+  --display: 'Prata', 'Times New Roman', serif;
+  --sans: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--velvet); scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--velvet);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: clamp(17px, .45vw + 15px, 19px);
+  line-height: 1.6;
+  letter-spacing: -.005em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg { max-width: 100%; }
+a { color: inherit; }
+::selection { background: var(--gold); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+#vitrine { position: fixed; left: 0; top: 0; width: 100%; height: 100vh; display: block; z-index: 0; }
+.grain {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.lite .grain { display: none; }
+.page { position: relative; z-index: 2; }
+.wrap { padding-left: var(--gutter); padding-right: var(--gutter-r); }
+.inner { max-width: 1320px; margin: 0 auto; }
+
+/* ---------- top bar ---------- */
+.top {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 3;
+  padding-top: max(18px, env(safe-area-inset-top, 0px));
+}
+.top .inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.mark { font-family: var(--sans); font-weight: 700; font-size: 15px; letter-spacing: .16em; color: var(--text); text-decoration: none; }
+.mark b { color: var(--gold); font-weight: 700; }
+.nav { display: flex; gap: clamp(14px, 2.4vw, 34px); font-size: 15px; }
+.nav a { text-decoration: none; color: var(--muted); padding: 6px 0; transition: color .3s; }
+.nav a:hover { color: var(--gold); }
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative; min-height: 100svh;
+  display: grid; align-content: end;
+  padding-top: 210px; padding-bottom: clamp(40px, 9vh, 96px);
+  pointer-events: none;
+}
+.hero a, .hero button { pointer-events: auto; }
+.hero .inner { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 64px); align-items: end; width: 100%; }
+h1 {
+  font-family: var(--display); font-weight: 400; margin: 0;
+  font-size: clamp(2.45rem, 5.4vw, 5.6rem); line-height: 1.02; letter-spacing: -.02em;
+  text-wrap: balance;
+}
+h1 .l { display: block; overflow: hidden; padding-bottom: .06em; }
+h1 .l > span { display: block; animation: rise 1.25s var(--ease-out) both; }
+h1 .l:nth-child(2) > span { animation-delay: .12s; }
+h1 .l:nth-child(3) > span { animation-delay: .24s; }
+h1 .g { color: var(--gold); }
+h1 .w { color: var(--text); }
+@keyframes rise { from { transform: translateY(108%); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { h1 .l > span { animation: none; } }
+.hero-side { display: grid; gap: 22px; justify-items: start; padding-bottom: .5rem; }
+.hero-side p { margin: 0; color: var(--muted); max-width: 34ch; font-size: 1rem; }
+.hero-side p strong { color: var(--text); font-weight: 500; }
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  font: 600 16px/1 var(--sans); letter-spacing: .01em;
+  color: var(--ink); background: var(--gold);
+  border: 0; border-radius: 2px; padding: 17px 22px; cursor: pointer; text-decoration: none;
+  box-shadow: 0 12px 26px -14px rgba(0, 0, 0, .85), 0 2px 4px rgba(0, 0, 0, .4);
+  transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out), background .3s;
+}
+.btn svg { width: 16px; height: 16px; transition: transform .4s var(--ease-out); }
+.btn:hover { background: #F7E49E; transform: translateY(-1px); box-shadow: 0 18px 34px -14px rgba(0, 0, 0, .9), 0 3px 6px rgba(0, 0, 0, .45); }
+.btn:hover svg { transform: translateY(3px); }
+.btn.ghost { background: transparent; color: var(--gold); box-shadow: inset 0 0 0 1px var(--hair-strong); }
+.btn.ghost:hover { background: rgba(242, 219, 130, .08); }
+.btn.ghost:hover svg { transform: translateX(3px); }
+
+.gem-tag {
+  position: fixed; z-index: 4; pointer-events: none; left: 0; top: 0;
+  transform: translate(-50%, -100%); opacity: 0; transition: opacity .25s;
+  text-align: center; white-space: nowrap;
+}
+.gem-tag.on { opacity: 1; }
+.gem-tag b { display: block; font-family: var(--display); font-weight: 400; font-size: 20px; color: var(--gold); line-height: 1.2; }
+.gem-tag span { font-size: 13px; color: var(--muted); }
+.hero-fallback { display: none; position: absolute; left: 0; right: 0; top: 26vh; justify-content: center; gap: 2vw; flex-wrap: wrap; padding: 0 16px; }
+.hero-fallback svg { width: clamp(34px, 6vw, 70px); height: auto; }
+.no-webgl .hero-fallback { display: flex; }
+
+/* ---------- section scaffolding ---------- */
+section { position: relative; }
+.sec { padding-top: clamp(96px, 14vh, 170px); }
+h2 {
+  font-family: var(--display); font-weight: 400; margin: 0 0 .5em;
+  font-size: clamp(2.1rem, 4.2vw, 4.1rem); line-height: 1.06; letter-spacing: -.015em; color: var(--text);
+  text-wrap: balance;
+}
+h2 em { font-style: normal; color: var(--gold); }
+.lead { color: var(--muted); max-width: 60ch; margin: 0; font-size: 1.06rem; }
+h3 { text-wrap: balance; }
+
+/* ---------- quick start ---------- */
+.quick ol { list-style: none; margin: clamp(32px, 5vh, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--hair); }
+.quick li { padding: 28px clamp(16px, 2.4vw, 36px) 8px 0; display: grid; gap: 10px; align-content: start; }
+.quick li + li { padding-left: clamp(16px, 2.4vw, 36px); border-left: 1px solid var(--hair); }
+.quick .n { font-family: var(--display); font-size: 2.6rem; line-height: 1; color: var(--gold); }
+.quick h3 { font-family: var(--sans); font-weight: 600; font-size: 1.2rem; margin: 0; color: var(--text); }
+.quick p { margin: 0; color: var(--muted); max-width: 36ch; }
+
+/* ---------- tools ---------- */
+.tools-grid { display: grid; grid-template-columns: minmax(0, .42fr) minmax(0, .58fr); gap: 0 clamp(24px, 4vw, 64px); }
+.tools-aside { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 13vh; pointer-events: none; }
+.aside-name { font-family: var(--display); font-size: clamp(1.8rem, 2.4vw, 2.5rem); color: var(--gold); line-height: 1.1; margin: 0; min-height: 1.1em; transition: opacity .35s; }
+.aside-meta { color: var(--muted); font-size: 15px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+.tools-main { padding-top: 2vh; padding-bottom: 8vh; min-width: 0; }
+.group-head { margin: 0 0 clamp(28px, 4vh, 44px); }
+.group-head + .cert { margin-top: 0; }
+.group-head.second { margin-top: clamp(120px, 18vh, 200px); }
+.group-head h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 2.6vw, 2.5rem); margin: 0 0 .35em; color: var(--text); }
+.group-head p { margin: 0; color: var(--muted); max-width: 52ch; }
+
+.cert {
+  position: relative; background: var(--paper); color: var(--ink);
+  border-radius: 3px; padding: clamp(26px, 3.2vw, 48px) clamp(22px, 3.2vw, 48px) clamp(64px, 6vw, 80px);
+  margin-top: clamp(64px, 12vh, 140px);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .75), 0 2px 8px rgba(0, 0, 0, .35);
+  scroll-margin-top: 12vh;
+}
+.cert::before {
+  content: ""; position: absolute; inset: 10px; pointer-events: none;
+  border: 1px solid rgba(182, 148, 66, .55); outline: 1px solid rgba(182, 148, 66, .22); outline-offset: 4px;
+}
+.cert::after {
+  content: ""; position: absolute; left: 22px; right: 22px; bottom: 22px; height: 26px; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='26' viewBox='0 0 120 26'%3E%3Cpath d='M0 13 C 15 1, 30 25, 60 13 S 105 1, 120 13' fill='none' stroke='%23cfc7ae' stroke-width='.7'/%3E%3Cpath d='M0 13 C 15 25, 30 1, 60 13 S 105 25, 120 13' fill='none' stroke='%23ddd6c0' stroke-width='.7'/%3E%3Cpath d='M0 13 C 20 5, 40 21, 60 13 S 100 5, 120 13' fill='none' stroke='%23e6e0cd' stroke-width='.5'/%3E%3C/svg%3E");
+  background-size: 120px 26px; opacity: .9;
+}
+.cert-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: center; }
+.cert-head svg { width: 52px; height: 44px; }
+.cert h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.8rem, 2.8vw, 2.6rem); line-height: 1.05; margin: 0; color: var(--ink); letter-spacing: -.01em; }
+.cert .repo { font-family: var(--mono); font-size: 14px; color: var(--ink-2); margin-top: 6px; word-break: break-all; }
+.cert .what { font-size: 1.08rem; line-height: 1.55; margin: 22px 0 0; max-width: 58ch; color: #1d1c19; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 26px 0 0; border-top: 1px solid rgba(20, 20, 20, .14); border-bottom: 1px solid rgba(20, 20, 20, .14); }
+.facts div { padding: 14px 12px 14px 0; }
+.facts div + div { padding-left: 14px; border-left: 1px solid rgba(20, 20, 20, .14); }
+.facts dt { font-size: 13.5px; color: var(--ink-2); }
+.facts dd { margin: 2px 0 0; font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+.license-note { font-size: 14.5px; color: var(--ink-2); margin: 10px 0 0; max-width: 60ch; }
+.pays { margin-top: 26px; }
+.pays h4, .install h4 { font-family: var(--display); font-weight: 400; font-size: 1.3rem; margin: 0 0 6px; color: var(--ink); }
+.pays p { margin: 0; max-width: 58ch; }
+.install { margin-top: 24px; }
+.phrase {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: stretch;
+}
+.phrase code {
+  font-family: var(--mono); font-size: 14.5px; line-height: 1.55; color: var(--ink);
+  background: #EAE9E3; border-radius: 2px; padding: 14px 16px; display: block; white-space: normal; word-break: break-word;
+}
+.copy {
+  font: 600 14px/1.2 var(--sans); color: var(--paper); background: var(--ink); border: 0; border-radius: 2px;
+  padding: 0 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  transition: background .25s;
+}
+.copy:hover { background: #2a2925; }
+.copy svg { width: 16px; height: 16px; }
+.cert-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 26px; flex-wrap: wrap; }
+.seal { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: var(--ink-2); }
+.seal svg { width: 40px; height: 40px; flex: none; }
+.gh { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(20, 20, 20, .35); padding-bottom: 2px; }
+.gh:hover { border-bottom-color: var(--ink); }
+.gh svg { width: 14px; height: 14px; }
+
+/* ---------- market ---------- */
+.ledger { margin: clamp(36px, 5vh, 56px) 0 0; padding: 0; list-style: none; border-top: 1px solid var(--hair); }
+.ledger li { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.4fr) minmax(0, 1fr); gap: 12px clamp(20px, 3vw, 48px); padding: 26px 0; border-bottom: 1px solid var(--hair); align-items: start; }
+.ledger h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.15; margin: 0; color: var(--text); }
+.ledger p { margin: 0; color: var(--muted); max-width: 56ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  font-size: 14.5px; color: var(--text); line-height: 1;
+  padding: 9px 12px 9px 9px; border-radius: 999px;
+  background: rgba(242, 219, 130, .06); box-shadow: inset 0 0 0 1px var(--hair);
+  transition: box-shadow .25s, background .25s;
+}
+.chip:hover { background: rgba(242, 219, 130, .12); box-shadow: inset 0 0 0 1px var(--hair-strong); }
+.chip svg { width: 18px; height: 15px; flex: none; }
+.chip.base { color: var(--muted); }
+
+.who { margin-top: clamp(110px, 16vh, 180px); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: clamp(28px, 4vh, 40px) 0 22px; }
+.filters button {
+  font: 500 15px/1 var(--sans); color: var(--muted); background: transparent; cursor: pointer;
+  border: 0; border-radius: 999px; padding: 11px 15px; box-shadow: inset 0 0 0 1px var(--hair);
+  transition: color .25s, background .25s, box-shadow .25s; min-height: 44px;
+}
+.filters button:hover { color: var(--text); box-shadow: inset 0 0 0 1px var(--hair-strong); }
+.filters button[aria-pressed="true"] { color: var(--ink); background: var(--gold); box-shadow: none; }
+.niches { border-top: 1px solid var(--hair); }
+.regions { display: grid; gap: 10px; margin-top: 22px; max-width: 62ch; }
+.regions p { margin: 0; color: var(--muted); }
+.regions a, .step li a { color: var(--gold); text-underline-offset: 3px; }
+.cert .region { margin-top: 10px; }
+.cert .region .tag { margin: 0; }
+.niche { border-bottom: 1px solid var(--hair); }
+.niche[hidden] { display: none; }
+.niche summary {
+  list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto 28px; gap: 16px; align-items: center;
+  padding: 20px 0; font-size: 1.12rem; font-weight: 600; color: var(--text);
+}
+.niche summary::-webkit-details-marker { display: none; }
+.niche summary .cat { font-size: 14px; font-weight: 400; color: var(--muted); }
+.niche summary svg { width: 22px; height: 22px; color: var(--gold); transition: transform .35s var(--ease-out); justify-self: end; }
+.niche[open] summary svg { transform: rotate(45deg); }
+.niche summary:hover { color: var(--gold); }
+.niche-body { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px clamp(20px, 3vw, 40px); margin: 0; padding: 0 0 28px; }
+.niche-body dt { margin: 0 0 4px; font-family: var(--display); font-weight: 400; font-size: 1.12rem; color: var(--gold); }
+.niche-body dd { margin: 0; color: var(--muted); }
+
+/* ---------- roadmap ---------- */
+.steps { list-style: none; margin: clamp(40px, 6vh, 64px) 0 0; padding: 0; position: relative; }
+.step { display: grid; grid-template-columns: clamp(64px, 8vw, 110px) minmax(0, 1fr); gap: 0 clamp(16px, 3vw, 40px); position: relative; padding-bottom: clamp(44px, 7vh, 72px); }
+.step::before { content: ""; position: absolute; left: calc(clamp(64px, 8vw, 110px) / 2 - .5px); top: 3.6rem; bottom: 10px; width: 1px; background: var(--hair); }
+.step:last-child::before { display: none; }
+.step .num { font-family: var(--display); font-size: clamp(2.4rem, 3.8vw, 3.6rem); line-height: 1; color: var(--gold); text-align: center; font-variant-numeric: lining-nums tabular-nums; }
+.step h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.55rem, 2.4vw, 2.2rem); line-height: 1.12; margin: .15em 0 .3em; color: var(--text); }
+.step .s { color: var(--text); margin: 0 0 14px; max-width: 60ch; font-weight: 300; font-size: 1.1rem; }
+.step ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; max-width: 58ch; }
+.step li { position: relative; padding-left: 22px; color: var(--muted); }
+.step li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); opacity: .8; }
+.step li b { color: var(--text); font-weight: 600; }
+.step li i { font-style: italic; color: var(--text); }
+.tag { display: inline-block; font-size: 12.5px; font-weight: 600; line-height: 1; padding: 5px 8px; border-radius: 999px; margin-right: 8px; vertical-align: 2px; color: var(--ink); background: var(--gold); }
+.tag.any { background: #CFCABB; }
+.tag.out { background: #8FB7E8; }
+.fork { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(20px, 3vw, 44px); margin-top: 8px; border-top: 1px solid var(--hair); }
+.branch { padding: 20px 0; border-bottom: 1px solid var(--hair); display: grid; gap: 8px; align-content: start; }
+.branch h4 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 1.35rem; color: var(--text); }
+.branch .sub { color: var(--gold); font-size: 14.5px; }
+.branch p { margin: 0; color: var(--muted); }
+
+/* ---------- close ---------- */
+.close { padding-top: clamp(110px, 16vh, 180px); padding-bottom: clamp(70px, 10vh, 120px); }
+.close h2 { max-width: 18ch; }
+.close .lead { margin-bottom: 30px; }
+footer { position: relative; z-index: 2; border-top: 1px solid var(--hair); padding-top: 26px; padding-bottom: max(26px, env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 14px; }
+footer .inner { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+.toast {
+  position: fixed; left: 50%; bottom: max(24px, env(safe-area-inset-bottom, 0px)); z-index: 9;
+  transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  background: var(--paper); color: var(--ink); font-weight: 500; font-size: 15px;
+  padding: 14px 18px; border-radius: 3px; box-shadow: 0 18px 40px -16px rgba(0, 0, 0, .7);
+  transition: opacity .3s, transform .45s var(--ease-out); max-width: calc(100vw - 32px);
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 999px) {
+  .tools-grid { grid-template-columns: minmax(0, 1fr); }
+  .tools-aside { display: none; }
+  .hero .inner { grid-template-columns: minmax(0, 1fr); }
+  .ledger li { grid-template-columns: minmax(0, 1fr); }
+  .niche-body { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .hero { padding-top: 300px; }
+  .nav { gap: 14px; font-size: 14px; }
+  .quick ol { grid-template-columns: minmax(0, 1fr); }
+  .quick li, .quick li + li { padding: 22px 0 18px; border-left: 0; border-bottom: 1px solid var(--hair); }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .facts div + div { padding-left: 0; border-left: 0; border-top: 1px solid rgba(20, 20, 20, .14); }
+  .phrase { grid-template-columns: minmax(0, 1fr); }
+  .copy { justify-content: center; }
+  .fork { grid-template-columns: minmax(0, 1fr); }
+  .niche summary { grid-template-columns: minmax(0, 1fr) 24px; }
+  .niche summary .cat { display: none; }
+}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113751259', 'ym');
+
+    ym(113751259, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<!-- /Yandex.Metrika counter -->
+<style>
+/* Окно с почтой поверх карты; закрывается один раз и запоминается в браузере */
+html.gate-on, html.gate-on body { overflow: hidden; }
+#gate { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; padding: 16px; background: rgba(10,10,10,.9); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+#gate[hidden] { display: none; }
+.gate-card { width: 100%; max-width: 440px; background: #121212; border: 1px solid rgba(242,219,130,.28); border-radius: 16px; padding: 30px 26px 24px; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.gate-kicker { margin: 0 0 14px; font: 700 12px/1 var(--sans); letter-spacing: .2em; color: var(--gold); }
+.gate-card h2 { margin: 0 0 12px; font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 6vw, 2rem); line-height: 1.12; color: var(--text); }
+.gate-sub { margin: 0 0 20px; font: 400 15.5px/1.5 var(--sans); color: var(--muted); }
+.gate-card input[type=email] { width: 100%; box-sizing: border-box; padding: 15px 16px; font: 500 16px/1.2 var(--sans); color: var(--text); background: #0A0A0A; border: 1px solid #2c2c2c; border-radius: 12px; outline: none; }
+.gate-card input[type=email]:focus { border-color: var(--gold); }
+.gate-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.gate-card button { width: 100%; margin-top: 12px; padding: 16px; font: 700 16px/1 var(--sans); letter-spacing: .04em; color: #0A0A0A; background: var(--gold); border: 0; border-radius: 12px; cursor: pointer; }
+.gate-card button:hover { filter: brightness(1.06); }
+.gate-card button:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+.gate-err { min-height: 1.3em; margin: 10px 0 0; font: 400 14px/1.3 var(--sans); color: #ef8a77; }
+</style>
+</head>
+<body>
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-t" hidden>
+  <form id="gate-f" class="gate-card" novalidate>
+    <p class="gate-kicker">ИИ МАСТОДОНТ</p>
+    <h2 id="gate-t">Карта: с нуля до первых клиентов на ИИ</h2>
+    <p class="gate-sub">Укажи почту - и карта откроется. Пиши точную: туда же буду присылать новые видео и материалы к ним.</p>
+    <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="ivan@gmail.com" aria-label="Почта" required>
+    <input type="text" name="website" class="gate-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button type="submit">Открыть карту</button>
+    <p class="gate-err" role="alert"></p>
+  </form>
+</div>
+<noscript><div><img src="https://mc.yandex.ru/watch/113751259" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- Витрина Мастодонта. Чёрный бархат, камни в WebGL, золото, белые сертификаты. Факты о репозиториях взяты из GitHub API. -->
+<canvas id="vitrine" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="gem-tag" id="gemTag" aria-hidden="true"><b></b><span></span></div>
+
+<div class="page">
+  <header class="top wrap">
+    <div class="inner">
+      <a class="mark" href="#top">МАСТО<b>ДОНТ</b></a>
+      <nav class="nav" aria-label="Разделы">
+        <a href="#tools">Инструменты</a>
+        <a href="#market">Кто платит</a>
+        <a href="#road">С чего начать</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="top" aria-labelledby="h1">
+      <div class="hero-fallback" id="heroFallback" aria-hidden="true"></div>
+      <div class="inner">
+        <h1 id="h1">
+          <span class="l"><span class="g">10 бесплатных</span></span>
+          <span class="l"><span class="g">инструментов для Claude</span></span>
+          <span class="l"><span class="w">и за что на каждом платят</span></span>
+        </h1>
+        <div class="hero-side">
+          <p><strong>Под каждым инструментом - услуга, за которую платят деньги.</strong> И отдельно - один для тех, кто ищет клиентов на Западе.</p>
+          <a class="btn" href="#tools">Смотреть первый
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v11M3 8.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick sec wrap" aria-labelledby="quick-h">
+      <div class="inner">
+        <h2 id="quick-h">Если у тебя <em>один вечер</em></h2>
+        <ol>
+          <li><span class="n">1</span><h3>Поставь базу</h3><p>ECC и скиллы Покока. Claude станет внимательнее и перестанет переделывать по три раза.</p></li>
+          <li><span class="n">2</span><h3>Выбери одну услугу</h3><p>Сайты, видео, тексты или разбор процессов. Одну, не все сразу. Ниже видно, кто за что платит.</p></li>
+          <li><span class="n">3</span><h3>Поставь инструмент под неё</h3><p>И сделай первую работу за вечер. Как дальше дойти до денег - в пятнадцати шагах в конце.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="tools sec wrap" id="tools" aria-labelledby="tools-h">
+      <div class="inner">
+        <h2 id="tools-h">Десять <em>камней</em></h2>
+        <p class="lead">У каждого инструмента сертификат: что он делает, сколько у него звёзд на GitHub, можно ли с ним работать на заказ, за что на нём платят и как поставить одной фразой.</p>
+        <div class="tools-grid">
+          <aside class="tools-aside" aria-hidden="true">
+            <p class="aside-name" id="asideName"></p>
+            <div class="aside-meta" id="asideMeta"></div>
+          </aside>
+          <div class="tools-main" id="certs"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="market sec wrap" id="market" aria-labelledby="market-h">
+      <div class="inner">
+        <h2 id="market-h">За что <em>платят</em></h2>
+        <p class="lead">Шесть направлений. Выбирается одно, а не все сразу. Справа - инструменты из витрины, которыми это делается.</p>
+        <ul class="ledger" id="ledger"></ul>
+
+        <div class="who">
+          <h2 id="who-h">Кто <em>платит</em></h2>
+          <p class="lead">Двадцать пять сфер. К каждой: почему там платят, где искать этих людей и чем зацепить с первого сообщения.</p>
+          <div class="regions">
+            <p><span class="tag">Россия и СНГ</span>Места поиска ниже - для них: 2ГИС, Яндекс Карты, Авито, чаты в Телеграме.</p>
+            <p><span class="tag out">Запад</span>Те же сферы ищутся в Google Maps, LinkedIn и на Upwork. Находить там людей помогает <a href="#t-outfind">OpenOutFind</a> из витрины.</p>
+          </div>
+          <div class="filters" id="filters" role="group" aria-label="Сферы"></div>
+          <div class="niches" id="niches"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="road sec wrap" id="road" aria-labelledby="road-h">
+      <div class="inner">
+        <h2 id="road-h">От нуля <em>до первых денег</em></h2>
+        <p class="lead">Пятнадцать шагов по порядку. Шаг закрыт, когда сделано то, что в нём написано, а не когда прочитано.</p>
+        <ol class="steps" id="steps"></ol>
+      </div>
+    </section>
+
+    <section class="close wrap" aria-labelledby="close-h">
+      <div class="inner">
+        <h2 id="close-h">Новые видео и материалы к ним придут <em>на почту</em></h2>
+        <p class="lead">Ту, которую ты оставил в боте. А пока - канал, где всё это показываю в деле.</p>
+        <a class="btn ghost" href="https://www.youtube.com/@aiBoomb" target="_blank" rel="noopener">Канал на YouTube
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="inner">
+      <span>МАСТОДОНТ</span>
+      <span>Данные о репозиториях - с GitHub</span>
+    </div>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var TOOLS = [
+    { id: 'ecc', group: 'base', name: 'ECC', stone: 'гранат', color: '#9E1B3B', ior: 1.76, cut: 'round',
+      repo: 'affaan-m/ECC', stars: 285999, license: 'MIT',
+      what: 'Система, которая прокачивает Claude Code и других агентов: проверенные скиллы, полезные привычки, память между сессиями и защита от опасных действий.',
+      pays: 'Сам ничего не продаёт. Делает быстрее и надёжнее любой заказ из витрины, поэтому ставится первым.',
+      phrase: 'Склонируй github.com/affaan-m/ECC и установи его по инструкции из README в мой Claude Code. Потом коротко расскажи, что изменилось.' },
+    { id: 'pocock', group: 'base', name: 'Скиллы Мэтта Покока', stone: 'перидот', color: '#8DC63F', ior: 1.68, cut: 'cushion',
+      repo: 'mattpocock/skills', stars: 300263, license: 'MIT',
+      what: 'Набор скиллов от известного разработчика Мэтта Покока. Claude сначала задаёт правильные вопросы и составляет план, а уже потом делает.',
+      pays: 'Меньше переделок в любом заказе: клиент получает то, что просил, с первого раза.',
+      phrase: 'Установи скиллы из github.com/mattpocock/skills в мой Claude Code по инструкции из README и покажи список того, что появилось.' },
+    { id: 'uiux', group: 'work', name: 'UI UX Pro Max', stone: 'сапфир', color: '#2C5BE8', ior: 1.77, cut: 'round',
+      repo: 'nextlevelbuilder/ui-ux-pro-max-skill', stars: 138693, license: 'MIT',
+      what: 'Скилл с дизайнерскими знаниями: стили, палитры, шрифты и правила интерфейсов. Claude собирает сайт уровня студии, а не шаблон.',
+      pays: 'Сайты для бизнеса: лендинг под одну услугу, сайт-визитка, переделка старого сайта.',
+      phrase: 'Установи скилл из github.com/nextlevelbuilder/ui-ux-pro-max-skill в мой Claude Code по инструкции из README. Потом собери с ним первый экран сайта для стоматологии.' },
+    { id: 'shaders', group: 'work', name: 'Shaders', stone: 'аметист', color: '#8E4FE6', ior: 1.55, cut: 'marquise',
+      repo: 'shader-effects-inc/shaders', stars: 5304, license: 'MIT',
+      what: 'Готовые живые эффекты для сайтов на WebGPU: переливы, свечение, движение фона. Подключаются к React, Vue, Svelte и Framer.',
+      pays: 'Вау-сайты, которые стоят дороже обычных: первый экран, который запоминают.',
+      phrase: 'Подключи эффекты из github.com/shader-effects-inc/shaders к моему сайту по инструкции из README и покажи три варианта первого экрана.' },
+    { id: 'hyperframes', group: 'work', name: 'Hyperframes', stone: 'рубин', color: '#D1173F', ior: 1.77, cut: 'oval',
+      repo: 'heygen-com/hyperframes', stars: 69538, license: 'Apache-2.0',
+      what: 'Инструмент от HeyGen: агент пишет страницу, а Hyperframes превращает её в видео. Ролик собирается кодом, без монтажной программы.',
+      pays: 'Видео и реклама нейросетями: промо, ролики для соцсетей, анимированные объявления.',
+      phrase: 'Установи github.com/heygen-com/hyperframes по инструкции из README и сделай 15-секундный рекламный ролик для кофейни.' },
+    { id: 'voice', group: 'work', name: 'VoiceStudio', stone: 'цитрин', color: '#F2B21B', ior: 1.55, cut: 'cushion',
+      repo: 'debpalash/VoiceStudio', stars: 80950, license: 'AGPL-3.0',
+      what: 'Бесплатная замена ElevenLabs, которая работает на твоём компьютере: клонирование голоса, дизайн голоса, дубляж видео.',
+      pays: 'Озвучка роликов и дубляж на другие языки.',
+      phrase: 'Установи github.com/debpalash/VoiceStudio на мой компьютер по инструкции из README и озвучь тестовый абзац двумя разными голосами.' },
+    { id: 'marketing', group: 'work', name: 'Marketing Skills', stone: 'изумруд', color: '#11A06A', ior: 1.58, cut: 'princess',
+      repo: 'coreyhaines31/marketingskills', stars: 55902, license: 'MIT',
+      what: 'Скиллы для маркетинга: продающие тексты, конверсия страниц, SEO, аналитика и рост.',
+      pays: 'Тексты на потоке, SEO и попадание клиента в ответы нейросетей.',
+      phrase: 'Установи скиллы из github.com/coreyhaines31/marketingskills в мой Claude Code по инструкции из README и разбери тексты на сайте моего клиента.' },
+    { id: 'archify', group: 'work', name: 'Archify', stone: 'аквамарин', color: '#34C2DB', ior: 1.58, cut: 'oval',
+      repo: 'tt-a1i/archify', stars: 87307, license: 'MIT',
+      what: 'Превращает любую идею, план или код в красивую интерактивную схему одной командой.',
+      pays: 'Разбор процессов: показать владельцу на схеме, где компания теряет деньги.',
+      phrase: 'Установи скилл из github.com/tt-a1i/archify в мой Claude Code по инструкции из README и нарисуй схему того, как в салоне красоты обрабатывают заявки.' },
+    { id: 'diagram', group: 'work', name: 'Diagram Design', stone: 'топаз', color: '#E87A2C', ior: 1.62, cut: 'marquise',
+      repo: 'cathrynlavery/diagram-design', stars: 59759, license: 'MIT',
+      what: 'Скилл для аккуратных диаграмм в журнальном стиле: 45 типов схем для отчётов и презентаций.',
+      pays: 'Схемы для коммерческих предложений, отчётов и разборов процессов.',
+      phrase: 'Установи скилл из github.com/cathrynlavery/diagram-design в мой Claude Code по инструкции из README и сделай схему коммерческого предложения на одну страницу.' },
+    { id: 'rea', group: 'work', name: 'REA', stone: 'бриллиант', color: '#E4ECF7', ior: 2.42, cut: 'round',
+      repo: 'morluto/rea', stars: 361149, license: 'MIT',
+      what: 'Разбирает любое приложение агентами: от того, как программа себя ведёт, до её внутренностей. Самый звёздный репозиторий витрины.',
+      pays: 'Клон нужной программы для клиента или разбор чужого сервиса, чтобы сделать свой.',
+      phrase: 'Подключи github.com/morluto/rea к моему Claude Code по инструкции из README и разбери, как устроено приложение, которое я назову.' },
+    { id: 'outfind', group: 'west', name: 'OpenOutFind', stone: 'турмалин', color: '#E0507A', ior: 1.62, cut: 'oval',
+      repo: 'eracle/OpenOutFind', stars: 21, license: 'GPL-3.0',
+      what: 'Ищет клиентов под описание твоего продукта: находит подходящих людей в LinkedIn через лицензированную базу и пишет, почему подходит каждый. На выходе таблица, по которой можно делать рассылку.',
+      pays: 'Это не услуга на продажу, а поиск клиентов для тебя самого. Подходит для западного B2B: LinkedIn в России заблокирован, а местных компаний из 2ГИС он не знает.',
+      note: 'Ранняя версия: 21 звезда на GitHub. Поиск по базе бесплатный, а почты людей находятся за отдельные деньги у поставщика данных. У автора есть готовый сервис openoutreach.app: 10 подходящих профилей бесплатно, дальше 2 доллара за контакт.',
+      phrase: 'Установи github.com/eracle/OpenOutFind по инструкции из README. Потом спроси меня, что я продаю и кому, и найди 10 подходящих людей.' }
+  ];
+
+  var LICENSES = {
+    'MIT': 'Свободная лицензия: можно использовать в работе на заказ и в своих проектах.',
+    'Apache-2.0': 'Свободная лицензия: можно использовать в работе на заказ и в своих проектах.',
+    'AGPL-3.0': 'Бесплатно, но с условием: если делаешь на нём свой сервис для других людей, код этого сервиса тоже должен быть открыт.',
+    'GPL-3.0': 'Свободная лицензия: пользоваться можно, но если распространяешь изменённую программу, её код тоже открываешь.'
+  };
+
+  var DIRECTIONS = [
+    { h: 'Сайты', p: 'Лендинг под одну услугу, сайт-визитка, переделка старого сайта, сайт вместе с админкой, чтобы клиент сам менял тексты и цены.', tools: ['uiux', 'shaders'] },
+    { h: 'Автоматизации', p: 'Бот, который отвечает на заявки. Сбор обращений из ВК, Телеграма и Авито в одно окно. Утренняя сводка владельцу. Разбор переписок менеджеров.', tools: ['ecc', 'pocock'], note: 'Собираются в Claude Code на базе:' },
+    { h: 'Попадание в ответы нейросетей', p: 'Человек спрашивает у нейросети «где заказать» - и она называет компании. Ты делаешь так, чтобы среди них был твой клиент. Плюс аудит: показать, что сейчас его там нет.', tools: ['marketing'] },
+    { h: 'Видео и реклама нейросетями', p: 'Ролики без съёмочной группы: реклама, промо, короткие видео для соцсетей, оживление фотографий товара.', tools: ['hyperframes', 'voice'] },
+    { h: 'Тексты на потоке', p: 'Посты, статьи, письма клиентам, описания товаров. Работа скучная, зато оплачивается каждый месяц.', tools: ['marketing'] },
+    { h: 'Разбор процессов', p: 'Приходишь и смотришь, на что уходит рабочее время людей. Показываешь, где компания теряет деньги. После этого покупают что угодно из списка выше.', tools: ['archify', 'diagram'] }
+  ];
+
+  var NICHES = [
+    ['Здоровье', 'Стоматологии', 'Один пациент приносит десятки тысяч за курс лечения, поэтому за каждую заявку идёт драка. Реклама дорогая, и любой процент конверсии сайта - это деньги.', '2ГИС и Яндекс Карты, отзовики. Смотри тех, у кого рейтинг хороший, а сайт из 2015 года.', 'Собери страницу одной услуги - имплантация или брекеты - и покажи рядом с их текущей. Разница видна без слов.'],
+    ['Здоровье', 'Косметология', 'Продают внешность, значит визуал решает всё. Сайт с плохими фото убивает доверие мгновенно.', 'Инстаграм-профили с записью через директ. У них часто вообще нет сайта, только соцсети.', 'Покажи, что запись через сайт снимает нагрузку с администратора, который отвечает в директе вручную.'],
+    ['Здоровье', 'Частные клиники и лаборатории', 'Много услуг и врачей, всё это надо где-то показывать и обновлять. Плюс запись, плюс подготовка к анализам.', 'Яндекс Карты, справочники, реклама в поиске по «сдать анализы город».', 'Админка, где сами меняют цены и расписание врачей, - для них это боль номер один.'],
+    ['Здоровье', 'Ветклиники', 'Владельцы животных ищут срочно и ночью. Кто первый попался и понятно показал адрес с телефоном, тот и получил клиента.', '2ГИС, группы владельцев животных в ВК и Телеграме.', 'Блок «круглосуточно» и маршрут до клиники прямо на первом экране.'],
+    ['Здоровье', 'Психологи и терапевты', 'Продают доверие. Люди перед записью изучают человека часами, а изучать нечего - только аватарка.', 'Профили на площадках подбора психологов, каналы в Телеграме, сарафан через знакомых.', 'Страница про метод и путь клиента, а не про дипломы. Дипломы есть у всех.'],
+    ['Красота', 'Салоны красоты и барбершопы', 'Живут на повторных визитах. Всё, что напоминает о себе и упрощает запись, окупается быстро.', '2ГИС по районам, Инстаграм.', 'Онлайн-запись без звонка. Половина клиентов не любит звонить, но об этом никто не говорит вслух.'],
+    ['Красота', 'Фитнес-студии и тренеры', 'У тренеров нет ничего, кроме соцсетей, а продавать надо программы за десятки тысяч.', 'Инстаграм и Телеграм тренеров, залы в 2ГИС.', 'Страница с тарифами и результатами до и после. Тренеры обычно стесняются собрать это в одном месте.'],
+    ['Красота', 'Массаж и СПА', 'Импульсная покупка. Красивая страница с ценами и свободным временем закрывает сделку сразу.', '2ГИС, купонные сервисы, соцсети мастеров.', 'Подарочный сертификат, который можно купить прямо на сайте.'],
+    ['Дом', 'Ремонт квартир', 'Средний чек огромный, конкуренция бешеная, а сайты у всех одинаково серые.', 'Авито Услуги, профильные чаты, реклама в поиске.', 'Калькулятор стоимости ремонта. Человек считает сам и оставляет контакты, чтобы получить расчёт.'],
+    ['Дом', 'Кухни и мебель на заказ', 'Покупку выбирают глазами и долго. Каталог работ с нормальными фото продаёт лучше менеджера.', '2ГИС, мебельные центры, Авито.', 'Галерея проектов с фильтром по стилю и бюджету.'],
+    ['Дом', 'Окна, потолки, двери', 'Быстрый цикл сделки, живут на заявках. Каждая лишняя заявка в день - это выручка.', 'Реклама в поиске, 2ГИС, объявления в подъездах и на Авито.', 'Замер за ноль рублей с формой на первом экране и честным сроком.'],
+    ['Дом', 'Загородное строительство', 'Чек от миллиона. Клиент изучает подрядчика месяцами, и ему нужно видеть проекты и этапы.', 'Выставки, профильные форумы, Авито, поисковая реклама.', 'Страница одного проекта дома со сметой по этапам. Это снимает главный страх - что цена вырастет.'],
+    ['Авто', 'Автосервисы', 'Клиент выбирает по близости и доверию. Прайс и понятный список работ решают.', '2ГИС, отзовики, автомобильные чаты по маркам.', 'Прайс по работам прямо на сайте. Большинство прячет цены, и это раздражает.'],
+    ['Авто', 'Детейлинг и тюнинг', 'Продают внешний вид, а показать его негде, кроме соцсетей.', 'Инстаграм, автоклубы, 2ГИС.', 'Галерея до и после с ползунком. Для этой ниши это идеальный формат.'],
+    ['Авто', 'Автошколы', 'Сезонный набор группами. В сезон нужна страница, которая собирает заявки потоком.', '2ГИС, реклама в поиске, паблики вузов и колледжей.', 'Расписание ближайших групп с обратным отсчётом до старта.'],
+    ['Услуги', 'Клининг', 'Заказы повторяются, клиент нужен один раз - дальше он возвращается сам.', 'Авито Услуги, чаты домов и ЖК, бизнес-центры.', 'Расчёт цены по площади и типу уборки прямо на странице.'],
+    ['Услуги', 'Грузоперевозки и переезды', 'Решение принимают за минуты. Кто быстрее посчитал и ответил, тот и забрал заказ.', 'Авито, чаты ЖК, площадки заказов.', 'Форма расчёта по маршруту и объёму с ответом за пять минут.'],
+    ['Услуги', 'Юристы', 'Чек высокий, доверие решает всё, а сайты у них обычно из 2010 года и написаны юридическим языком.', 'Справочники, юридические каталоги, рекомендации бухгалтеров.', 'Страница под одну проблему человеческим языком: «что делать, если затопили соседи».'],
+    ['Обучение', 'Онлайн-школы и курсы', 'Живут на запусках. Каждый запуск требует новую страницу, и делать её надо быстро.', 'Телеграм-каналы экспертов, площадки курсов, чаты продюсеров.', 'Собери страницу под их ближайший запуск и покажи до старта. Времени у них всегда нет.'],
+    ['Обучение', 'Репетиторы и детские центры', 'Родители выбирают глазами и по отзывам. Сезон - август и сентябрь, деньги нужны быстро.', 'Родительские чаты, 2ГИС, площадки репетиторов.', 'Расписание занятий и цены без звонка. Родители не хотят звонить и спрашивать.'],
+    ['Обучение', 'Коучи и консультанты', 'Продают себя. Без нормальной страницы выглядят как все остальные.', 'Телеграм и профессиональные сообщества, конференции.', 'Страница-визитка с записью на разбор. Это их основной вход в продажу.'],
+    ['Еда', 'Кафе, пекарни, доставка', 'Меню меняется постоянно, а править его негде. Плюс агрегаторы забирают комиссию, и свои заказы выгоднее.', '2ГИС, агрегаторы доставки, соцсети заведений.', 'Меню, которое они меняют сами, и заказ напрямую, без комиссии агрегатора.'],
+    ['События', 'Ведущие, фотографы, декор', 'Продают впечатление, а портфолио лежит в соцсетях вперемешку.', 'Свадебные площадки и каталоги, Инстаграм, чаты организаторов.', 'Портфолио по типам событий и календарь занятых дат.'],
+    ['B2B', 'Производство и оптовики', 'Продают другим компаниям, где решение принимают по документам и каталогу. Сайт часто вообще отсутствует.', 'Отраслевые выставки, каталоги поставщиков, поиск по запросу «купить оптом».', 'Каталог с выгрузкой прайса и заявкой на коммерческое предложение.'],
+    ['B2B', 'Агентства: таргет, SMM, продакшн', 'У них уже есть клиенты, а задачи по сайтам и автоматизации они не делают сами. Это не клиент, а канал.', 'Профессиональные чаты, конференции, рейтинги агентств.', 'Предложи процент за рекомендацию и сделай первый проект их клиенту быстро. Дальше они приводят сами.']
+  ];
+
+  var RU = '<span class="tag">Россия</span>', ANY = '<span class="tag any">везде</span>', OUT = '<span class="tag out">другие страны</span>';
+  var STEPS = [
+    { t: 'Выбери нишу', s: 'Ниша - это тип клиента. Не «бизнес вообще», а стоматологии, автосервисы, онлайн-школы.', d: [
+      'Если делать всё и для всех, каждый заказ будет как первый. Ничего не станет быстрее и дороже',
+      'Проверка простая: <b>назови пять таких компаний прямо сейчас</b>, не открывая поиск',
+      'Не назвал пять - ниша чужая. Возьми ту, где ты сам крутился или где работают знакомые',
+      'Скажи вслух одной фразой: <b>«я делаю сайты для стоматологий»</b>. Не складывается - шаг не закрыт'] },
+    { t: 'Посмотри, за что там уже платят', s: 'Сначала разведка, потом работа.', d: [
+      'Открой <b>10 сайтов</b> таких компаний. Не самых крутых, а обычных',
+      'Выпиши, что есть у всех. Вот за это в этой сфере и платят деньги',
+      'Если чего-то нет ни у кого - это <i>не золотая жила</i>. Скорее, это там просто не нужно',
+      'Спроси у нейросети, что чаще всего заказывают такие компании. Ответ сверь с теми же сайтами'] },
+    { t: 'Выбери, что именно ты делаешь', s: 'Дальше путь один и тот же, но делать можно разное. Выбери одно. Не два.', fork: [
+      { h: 'Сайты', sub: 'лендинги, визитки, редизайн', p: 'Делаешь сайт компании, у которой его нет или он остался из 2010 года. Самый простой старт: клиент видит результат глазами и сразу понимает, за что заплатил.', tools: ['uiux', 'shaders'] },
+      { h: 'Автоматизации', sub: 'боты и сбор заявок', p: 'У компании заявки летят из ВК, Телеграма и Авито, и половина теряется. Ты собираешь их в одно окно и делаешь бота, который отвечает сам. Продать сложнее, чем сайт, зато платят каждый месяц.', tools: ['ecc', 'pocock'] },
+      { h: 'ИИ-аудит', sub: 'ищешь, где компания теряет деньги', p: 'Приходишь и смотришь, на что у людей уходит рабочее время. Потом показываешь: вот тут три человека руками делают то, что можно вообще не делать. После такого разговора у тебя покупают что угодно.', tools: ['archify', 'diagram'] },
+      { h: 'GEO', sub: 'чтобы нейросеть называла твоего клиента', p: 'Раньше человек искал на картах или в поиске. Сейчас он спрашивает нейросеть: «где заказать кухню в Казани». Ты делаешь так, чтобы среди названных был твой клиент. Эффект приходит не сразу, поэтому продавай тем, у кого клиенты уже есть.', tools: ['marketing'] },
+      { h: 'AI-видео', sub: 'ролики без камеры и актёров', p: 'Делаешь рекламу, промо и короткие видео для соцсетей без съёмочной группы. Платят меньше, чем за сайт, зато заказывают снова и снова.', tools: ['hyperframes', 'voice'] },
+      { h: 'Контент на потоке', sub: 'посты, статьи, рассылки', p: 'Ведёшь компании соцсети и письма клиентам. Работа скучная, но деньги приходят каждый месяц, а не один раз.', tools: ['marketing'] },
+      { h: 'Свой сервис по подписке', sub: 'не на заказ, а своё', p: 'Делаешь сайт или программу, куда люди заходят и платят за пользование каждый месяц. В перспективе денег больше, но первые появятся очень нескоро. Новичку не сюда.', tools: ['rea'] }] },
+    { t: 'Сделай первую работу за один вечер', s: 'Не «хорошо». Не «как у крутых». За вечер.', d: [
+      'Поставь базу - <b>ECC и скиллы Покока</b> - и инструмент своей ветки из витрины выше',
+      'Первая работа <i>не продаёт</i>. Она просто доказывает, что ты умеешь. Этого достаточно',
+      'Пока её нет, ты для всех никто, и говорить с тобой не о чем',
+      '<b>Вот тут и сгорает месяц.</b> Люди вылизывают то, что никто не увидит',
+      'Шаг закрыт не когда «готово», а когда <b>ты показал это живому человеку</b>'] },
+    { t: 'Собери портфолио из трёх работ', s: 'Выбери три реальные компании из своей ниши и сделай для них. Они об этом пока не знают.', d: [
+      'Так появляется портфолио, когда показывать ещё нечего',
+      'Заодно получаешь <b>три готовых повода написать</b> - тебе уже есть что показать',
+      'Сложи скриншоты «как было и как стало» в один файл. Он же пойдёт в первое сообщение',
+      'Не выдавай это за выполненные заказы. Говори честно: сделал сам, чтобы показать, как может быть'] },
+    { t: 'Где брать клиентов', s: 'Не «в интернете». Конкретные места, и где что работает.', d: [
+      RU + '<b>Карты и справочники:</b> 2ГИС, Яндекс Карты. Ищешь тех, кто есть, но выглядит плохо',
+      RU + '<b>Вакансии:</b> hh.ru, Авито Работа. Компания ищет маркетолога на зарплату - значит, деньги на эту задачу уже выделены, и их больше, чем ты попросишь за разовую работу',
+      ANY + '<b>Чаты по твоей теме в Телеграме.</b> Там люди вслух проговаривают проблему ещё до того, как начнут искать исполнителя',
+      ANY + '<b>Партнёры:</b> таргетологи, продюсеры, агентства. У них уже есть клиенты, а у клиентов задачи, которые сами они не делают',
+      OUT + 'Если ты не в России, к этому добавляются <b>Upwork</b> и <b>LinkedIn</b> - там платят в валюте. В России они недоступны. Искать людей в LinkedIn помогает <a href="#t-outfind">OpenOutFind</a> из витрины',
+      'Возьми <b>одно</b> место на первый месяц. Схватишься за все сразу - не доведёшь ни одно'] },
+    { t: 'Первое сообщение', s: 'Не «здравствуйте, я делаю сайты, вам актуально?».', d: [
+      'Работает только одно: <b>ты уже что-то для них сделал</b>. Не предлагаешь, а показываешь',
+      'В сообщении не про тебя и твои умения, а про их проблему, названную точно',
+      'Сразу давай ссылку на готовое. Не описание того, что мог бы сделать',
+      'Ответили «покажите»? Включи запись экрана на <b>40 секунд</b>, поводи мышкой и расскажи голосом, что где. Человек увидит, что с ним говорил живой мастер, а не рассылка',
+      '<b>10 сообщений в день, а не 100.</b> Когда пишешь каждому лично, больше и не получится'] },
+    { t: 'Разговор голосом', s: 'Из переписки в звонок. Пятнадцать минут.', d: [
+      '<b>Восемьдесят процентов времени говорит он.</b> Ты задаёшь вопросы и записываешь',
+      'Три вопроса: как у вас это устроено сейчас · сколько вы на этом теряете · кто у вас решает, делать или нет',
+      'Звонок нужен не чтобы продать, а чтобы понять: есть ли у него деньги и настоящая задача',
+      'Нет денег или задачи - заканчивай сразу. Ты только что сэкономил себе неделю'] },
+    { t: 'Сколько взять денег', s: 'Здесь новички теряют больше всего.', d: [
+      'Цена не из головы и не по часам. Считай <b>от того, что человек получит</b>: сколько он заработает или перестанет терять',
+      'Скажи вслух при нём: <b>«вы платите один раз, а экономите каждый месяц»</b> - и посчитай на его же цифрах. Так снимается «дорого»',
+      '<b>Считай двумя частями:</b> отдельно твоя работа, отдельно платные сервисы, которые нужны для работы. Смешаешь - будешь оплачивать их из своего кармана весь год',
+      RU + OUT + 'Чем принимать деньги: в России - Продамус, ЮKassa, самозанятость. В других странах - Stripe и PayPal, <b>из России они не работают</b>',
+      'Есть заказы, от которых нужно <b>отказаться</b>. Понимать это учатся дольше всего'] },
+    { t: 'Отправь КП', s: 'КП - коммерческое предложение. Один документ на страницу, не двадцать.', d: [
+      'Сначала <b>его проблема тремя пунктами</b>, его же словами с разговора. Чтобы он узнал себя',
+      'Потом <b>что ты сделаешь - двумя пунктами</b>: «сначала я..., затем я...»',
+      'Потом сроки по частям: что будет готово к какому числу. Не «примерно месяц»',
+      'В конце цена, двумя частями, как в прошлом шаге',
+      'Пиши сухо. Красивости читаются как «он сам не уверен»'] },
+    { t: 'Сделай работу', s: 'Здесь ты впервые узнаешь, сколько это на самом деле занимает.', d: [
+      'Договорись <b>до начала</b>: правки собираем в один список и делаем один-два раза. Иначе работа не закончится никогда',
+      'Записывай, сколько времени ушло, прямо с первого дня. Потом не вспомнишь',
+      'Раз в два-три дня пиши коротко, как идут дела, даже если показать нечего. Молчание человек читает как «он пропал»'] },
+    { t: 'Сдай работу', s: 'Не письмом «всё готово, ссылка внутри».', d: [
+      '<b>Запиши видео</b>, где показываешь, что сделал и как этим пользоваться. Человек не видел твою работу изнутри и сам её не оценит',
+      'Приложи короткий документ, который закрывает заказ',
+      'Сдача - это <b>повод для следующего разговора</b>, а не конец'] },
+    { t: 'Попроси следующий заказ', s: 'Проще всего продать тому, кто уже один раз заплатил.', d: [
+      'Спрашивай <b>сразу после сдачи</b>, пока он доволен',
+      'Расскажи, что ещё заметил у него, пока работал. Вот это и есть следующий заказ',
+      'Через месяц он про тебя забудет. Времени мало'] },
+    { t: 'Посчитай, сколько заработал в час', s: 'Деньги поделить на часы. На все часы.', d: [
+      'Считай <b>всё</b>: переписку, звонки, правки, ожидание материалов от клиента',
+      'Задай себе два вопроса: что прошло хорошо · что в следующий раз сделаю иначе',
+      '<b>Число тебе не понравится.</b> В этом и смысл',
+      'Не посчитаешь - возьмёшь второй заказ по цене первого. И третий тоже'] },
+    { t: 'Повтори', s: 'Не «расти» и не «масштабируйся». Просто сделай то же самое ещё раз.', d: [
+      'Второй заказ в той же сфере делается <b>вдвое быстрее</b> и стоит дороже - ты уже знаешь, где ямы',
+      '<b>Всё начинает работать не с первого клиента, а с третьего</b>',
+      'Твоя ставка растёт с каждым заказом, если после каждого ты её считаешь'] }
+  ];
+
+  window.VITRINE_TOOLS = TOOLS;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function starsWord(n) { var m10 = n % 10, m100 = n % 100; if (m10 === 1 && m100 !== 11) return 'звезда'; if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return 'звезды'; return 'звёзд'; }
+  function shade(hex, k) {
+    var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+    function f(v) { return Math.max(0, Math.min(255, Math.round(k > 0 ? v + (255 - v) * k : v * (1 + k)))); }
+    return 'rgb(' + f(r) + ',' + f(g) + ',' + f(b) + ')';
+  }
+  function gemSVG(color) {
+    return '<svg viewBox="0 0 48 40" aria-hidden="true">' +
+      '<polygon points="11,2 37,2 47,14 24,39 1,14" fill="' + color + '"/>' +
+      '<polygon points="11,2 37,2 32,14 16,14" fill="' + shade(color, .45) + '"/>' +
+      '<polygon points="1,14 16,14 24,39" fill="' + shade(color, -.25) + '"/>' +
+      '<polygon points="47,14 32,14 24,39" fill="' + shade(color, -.4) + '"/>' +
+      '<polygon points="16,14 32,14 24,39" fill="' + shade(color, .12) + '"/>' +
+      '<polygon points="11,2 16,14 1,14" fill="' + shade(color, .25) + '"/>' +
+      '<polygon points="37,2 47,14 32,14" fill="' + shade(color, -.1) + '"/>' +
+      '<polygon points="11,2 37,2 47,14 24,39 1,14" fill="none" stroke="rgba(0,0,0,.28)" stroke-width=".8" stroke-linejoin="round"/></svg>';
+  }
+  var SEAL = '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="#B69442" stroke-width="1"/><circle cx="20" cy="20" r="15" fill="none" stroke="#B69442" stroke-width=".6" stroke-dasharray="1.6 2"/><path d="M20 9.5 22.6 17h7.9l-6.4 4.6 2.5 7.6L20 24.6l-6.6 4.6 2.5-7.6L9.5 17h7.9z" fill="#B69442"/></svg>';
+  var COPY_ICON = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 3V2.5A1 1 0 0 0 9.5 1.5h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1H4" stroke="currentColor" stroke-width="1.4"/></svg>';
+  var OUT_ICON = '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M5 2.5h6.5V9M11.5 2.5 3 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var PLUS = '<svg viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M11 4v14M4 11h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  var byId = {}; TOOLS.forEach(function (t, i) { t.index = i; byId[t.id] = t; });
+
+  function chip(id) {
+    var t = byId[id];
+    return '<a class="chip" href="#t-' + t.id + '">' + gemSVG(t.color) + esc(t.name) + '</a>';
+  }
+
+  /* certificates */
+  var certs = document.getElementById('certs');
+  var html = '';
+  TOOLS.forEach(function (t, i) {
+    if (i === 0) html += '<div class="group-head"><h3>Сначала база</h3><p>Эти два ставятся первыми. Сами ничего не продают, но ускоряют любой заказ.</p></div>';
+    if (t.group === 'work' && TOOLS[i - 1].group === 'base') html += '<div class="group-head second"><h3>Потом инструмент под услугу</h3><p>Восемь инструментов. В каждом сертификате - за что на нём платят.</p></div>';
+    if (t.group === 'west' && TOOLS[i - 1].group !== 'west') html += '<div class="group-head second"><h3>Если клиенты на Западе</h3><p>Около трети тех, кто ответил на нашу анкету, живёт не в России. Этот инструмент для них: он ищет клиентов в LinkedIn. Для России и СНГ он не подходит.</p></div>';
+    html += '<article class="cert" id="t-' + t.id + '" data-i="' + i + '" aria-labelledby="t-' + t.id + '-h">' +
+      '<div class="cert-head">' + gemSVG(t.color) + '<div><h3 id="t-' + t.id + '-h">' + esc(t.name) + '</h3><div class="repo">github.com/' + esc(t.repo) + '</div>' +
+      (t.group === 'west' ? '<div class="region"><span class="tag out">Запад</span></div>' : '') + '</div></div>' +
+      '<p class="what">' + esc(t.what) + '</p>' +
+      '<dl class="facts"><div><dt>Звёзд на GitHub</dt><dd>' + fmt(t.stars) + '</dd></div>' +
+      '<div><dt>Лицензия</dt><dd>' + esc(t.license) + '</dd></div></dl>' +
+      '<p class="license-note">' + esc(LICENSES[t.license]) + '</p>' +
+      '<div class="pays"><h4>' + (t.group === 'west' ? 'Зачем он тебе' : 'За что платят') + '</h4><p>' + esc(t.pays) + '</p>' +
+      (t.note ? '<p class="license-note">' + esc(t.note) + '</p>' : '') + '</div>' +
+      '<div class="install"><h4>Как поставить одной фразой</h4><div class="phrase"><code id="ph-' + t.id + '">' + esc(t.phrase) + '</code>' +
+      '<button class="copy" type="button" data-copy="ph-' + t.id + '">' + COPY_ICON + 'Скопировать</button></div></div>' +
+      '<div class="cert-foot"><div class="seal">' + SEAL + '<span>Сверено с GitHub</span></div>' +
+      '<a class="gh" href="https://github.com/' + esc(t.repo) + '" target="_blank" rel="noopener">Открыть на GitHub ' + OUT_ICON + '</a></div>' +
+      '</article>';
+  });
+  certs.innerHTML = html;
+
+  /* ledger */
+  document.getElementById('ledger').innerHTML = DIRECTIONS.map(function (d) {
+    return '<li><h3>' + esc(d.h) + '</h3><p>' + esc(d.p) + '</p><div class="chips">' +
+      (d.note ? '<span class="chip base" style="box-shadow:none;background:none;padding-left:0">' + esc(d.note) + '</span>' : '') +
+      d.tools.map(chip).join('') + '</div></li>';
+  }).join('');
+
+  /* niches */
+  var cats = ['Все'];
+  NICHES.forEach(function (n) { if (cats.indexOf(n[0]) < 0) cats.push(n[0]); });
+  var filters = document.getElementById('filters');
+  filters.innerHTML = cats.map(function (c, i) { return '<button type="button" aria-pressed="' + (i === 0) + '" data-cat="' + esc(c) + '">' + esc(c) + '</button>'; }).join('');
+  document.getElementById('niches').innerHTML = NICHES.map(function (n) {
+    return '<details class="niche" data-cat="' + esc(n[0]) + '"><summary><span>' + esc(n[1]) + '</span><span class="cat">' + esc(n[0]) + '</span>' + PLUS + '</summary>' +
+      '<dl class="niche-body"><div><dt>Почему платят</dt><dd>' + esc(n[2]) + '</dd></div><div><dt>Где искать</dt><dd>' + esc(n[3]) + '</dd></div><div><dt>Чем зацепить</dt><dd>' + esc(n[4]) + '</dd></div></dl></details>';
+  }).join('');
+  filters.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    filters.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    var c = b.getAttribute('data-cat');
+    document.querySelectorAll('.niche').forEach(function (n) { n.hidden = !(c === 'Все' || n.getAttribute('data-cat') === c); });
+  });
+
+  /* roadmap */
+  document.getElementById('steps').innerHTML = STEPS.map(function (s, i) {
+    var body = s.fork
+      ? '<div class="fork">' + s.fork.map(function (f) {
+          return '<div class="branch"><h4>' + esc(f.h) + '</h4><span class="sub">' + esc(f.sub) + '</span><p>' + esc(f.p) + '</p><div class="chips">' + f.tools.map(chip).join('') + '</div></div>';
+        }).join('') + '</div>'
+      : '<ul>' + s.d.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+    return '<li class="step"><span class="num">' + (i + 1) + '</span><div><h3>' + esc(s.t) + '</h3><p class="s">' + esc(s.s) + '</p>' + body + '</div></li>';
+  }).join('');
+
+  /* hero fallback row (no WebGL) */
+  document.getElementById('heroFallback').innerHTML = TOOLS.map(function (t) { return gemSVG(t.color); }).join('');
+
+  /* copy */
+  var toast = document.getElementById('toast'), toastTimer;
+  function say(msg) { toast.textContent = msg; toast.classList.add('on'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { toast.classList.remove('on'); }, 2600); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    var text = document.getElementById(b.getAttribute('data-copy')).textContent;
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); say('Фраза скопирована. Вставь её в Claude Code.'); } catch (err) { say('Не вышло скопировать. Выдели фразу и скопируй вручную.'); }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { say('Фраза скопирована. Вставь её в Claude Code.'); }, fallback);
+    } else fallback();
+  });
+
+  /* active certificate -> sticky caption + WebGL focus */
+  var asideName = document.getElementById('asideName'), asideMeta = document.getElementById('asideMeta');
+  window.__activeTool = 0;
+  function setActive(i) {
+    window.__activeTool = i;
+    var t = TOOLS[i];
+    var main = TOOLS.filter(function (x) { return x.group !== 'west'; }).length;
+    asideName.textContent = t.name;
+    asideMeta.textContent = t.stone + ' · ' + (t.group === 'west' ? 'отдельно, для Запада' : (i + 1) + ' из ' + main) + ' · ' + fmt(t.stars) + ' ' + starsWord(t.stars) + ' на GitHub';
+  }
+  setActive(0);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) setActive(+en.target.getAttribute('data-i')); });
+    }, { rootMargin: '-48% 0px -48% 0px' });
+    document.querySelectorAll('.cert').forEach(function (c) { io.observe(c); });
+  }
+})();
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+const TOOLS = window.VITRINE_TOOLS || [];
+const canvas = document.getElementById('vitrine');
+const tag = document.getElementById('gemTag');
+const heroEl = document.getElementById('top');
+const toolsEl = document.getElementById('tools');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// weak phones (Android reports its memory) and data saver get a lighter picture: lower resolution, no rainbow film, 30 fps
+const lite = (navigator.deviceMemory || 8) <= 4 || !!(navigator.connection && navigator.connection.saveData);
+if (lite) document.documentElement.classList.add('lite');
+
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: lite ? 'low-power' : 'high-performance' });
+} catch (e) {
+  document.documentElement.classList.add('no-webgl');
+}
+
+if (renderer) {
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lite ? 1 : window.innerWidth < 1000 ? 1.5 : 1.75));
+  renderer.toneMapping = THREE.NeutralToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.setClearColor(0x0a0a0a, 1);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  camera.position.set(0, 0, 10);
+  /* jeweller's light box: a dark room with strips and soft boxes, so each facet flashes or falls into shadow */
+  function lightBox() {
+    const room = new THREE.Scene();
+    room.background = new THREE.Color(0x0b0b0b);
+    const plane = new THREE.PlaneGeometry(1, 1);
+    const panel = (w, h, x, y, z, power, tint = 0xffffff) => {
+      const p = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({ color: new THREE.Color(tint).multiplyScalar(power), side: THREE.DoubleSide }));
+      p.scale.set(w, h, 1); p.position.set(x, y, z); p.lookAt(0, 0, 0); room.add(p);
+    };
+    panel(6, 6, 0, 6.5, -2.5, 7);              // overhead box, set back so the table does not mirror it flat
+    panel(3.4, 2.2, 0, 1.2, 8, 2.5);           // soft box behind the viewer
+    for (let k = 0; k < 10; k++) {             // ring of strips, bright and dim in turn
+      const a = (k / 10) * Math.PI * 2;
+      panel(1.3, 5, Math.sin(a) * 6.5, 0.6, Math.cos(a) * 6.5, k % 2 ? 1.6 : 6);
+    }
+    panel(5, 5, 0, -6, 0.5, 0.9, 0xf2db82);    // gold bounce from below
+    return room;
+  }
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(lightBox(), 0.012).texture;
+
+  const key = new THREE.DirectionalLight(0xffffff, 2.4);
+  key.position.set(3, 6, 6);
+  scene.add(key);
+  const warm = new THREE.PointLight(0xffe7b0, 22, 40);
+  warm.position.set(-4, 3, 5);
+  scene.add(warm);
+
+  /* velvet backdrop with a soft spotlight, baked once (static grain, no shimmer) */
+  function velvetTexture() {
+    const c = document.createElement('canvas'); c.width = 1024; c.height = 1024;
+    const x = c.getContext('2d');
+    x.fillStyle = '#0a0a0a'; x.fillRect(0, 0, 1024, 1024);
+    let g = x.createRadialGradient(512, 400, 0, 512, 400, 640);
+    g.addColorStop(0, 'rgba(126,110,82,0.62)');
+    g.addColorStop(0.32, 'rgba(70,61,48,0.38)');
+    g.addColorStop(0.7, 'rgba(24,22,20,0.15)');
+    g.addColorStop(1, 'rgba(10,10,10,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 1024, 1024);
+    const img = x.getImageData(0, 0, 1024, 1024), d = img.data;
+    for (let i = 0; i < d.length; i += 4) { const n = (Math.random() - 0.5) * 9; d[i] += n; d[i + 1] += n; d[i + 2] += n; }
+    x.putImageData(img, 0, 0);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+  }
+  const backMat = new THREE.MeshBasicMaterial({ map: velvetTexture(), toneMapped: false });
+  const back = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), backMat);
+  back.position.z = -3;
+  scene.add(back);
+
+  /* sparkle sprite */
+  function starTexture() {
+    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const x = c.getContext('2d');
+    const g = x.createRadialGradient(64, 64, 0, 64, 64, 20);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 128, 128);
+    x.globalCompositeOperation = 'lighter';
+    [[0, 1], [Math.PI / 2, 1], [Math.PI / 4, 0.45], [-Math.PI / 4, 0.45]].forEach(([a, len]) => {
+      x.save(); x.translate(64, 64); x.rotate(a);
+      const lg = x.createLinearGradient(-64 * len, 0, 64 * len, 0);
+      lg.addColorStop(0, 'rgba(255,255,255,0)'); lg.addColorStop(0.5, 'rgba(255,255,255,0.95)'); lg.addColorStop(1, 'rgba(255,255,255,0)');
+      x.fillStyle = lg; x.fillRect(-64 * len, -1.4, 128 * len, 2.8); x.restore();
+    });
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+  }
+  const starTex = starTexture();
+
+  /* brilliant-style cuts from one lathe profile */
+  function cutGeometry(cut) {
+    const pts = [
+      new THREE.Vector2(0.001, -0.92), new THREE.Vector2(1.0, -0.02), new THREE.Vector2(1.0, 0.06),
+      new THREE.Vector2(0.62, 0.36), new THREE.Vector2(0.001, 0.36)
+    ];
+    const seg = { round: 16, oval: 16, cushion: 8, marquise: 12, princess: 4 }[cut] || 16;
+    const g = new THREE.LatheGeometry(pts, seg);
+    if (cut === 'cushion') g.rotateY(Math.PI / 8);
+    if (cut === 'princess') g.rotateY(Math.PI / 4);
+    const sx = { oval: 1.28, marquise: 1.6 }[cut] || 1;
+    const sz = { oval: 0.86, marquise: 0.7 }[cut] || 1;
+    g.scale(sx, 1, sz);
+    g.computeVertexNormals();
+    return g;
+  }
+
+  const gems = TOOLS.map((t, i) => {
+    const color = new THREE.Color(t.color);
+    const isDiamond = t.id === 'rea';
+    const geo = cutGeometry(t.cut);
+    // two layers, the usual way to fake a cut stone without refraction:
+    // the inner facets seen through the table give the star pattern, the surface adds only the glints on top
+    const inner = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({
+      color: isDiamond ? new THREE.Color(0xeef2ff) : color,
+      metalness: isDiamond ? 0.95 : 0.88, roughness: 0.035,
+      emissive: color, emissiveIntensity: isDiamond ? 0.02 : 0.16, envMapIntensity: 2.1,
+      side: THREE.BackSide, flatShading: true
+    }));
+    const mesh = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({
+      color: 0x000000, metalness: 0, roughness: 0.02, ior: t.ior, specularIntensity: 1, envMapIntensity: 1.6,
+      iridescence: lite ? 0 : isDiamond ? 1 : 0.45, iridescenceIOR: 1.8, iridescenceThicknessRange: [180, 620],
+      transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, flatShading: true
+    }));
+    mesh.userData.index = i;
+    const spinner = new THREE.Group(); spinner.add(inner, mesh);
+    spinner.rotation.y = Math.random() * Math.PI * 2;
+    const tilt = new THREE.Group(); tilt.rotation.x = 0.92; tilt.add(spinner);
+    const group = new THREE.Group(); group.add(tilt);
+    scene.add(group);
+    const sparks = [];
+    for (let k = 0; k < 3; k++) {
+      const sm = new THREE.SpriteMaterial({ map: starTex, color: 0xffffff, transparent: true, depthWrite: false, depthTest: false, blending: THREE.AdditiveBlending, opacity: 0 });
+      const sp = new THREE.Sprite(sm);
+      const a = Math.random() * Math.PI * 2, r = 0.45 + Math.random() * 0.5;
+      sp.position.set(Math.cos(a) * r, 0.2 + Math.random() * 0.2, Math.sin(a) * r);
+      sp.userData = { phase: Math.random() * 10, speed: 0.6 + Math.random() * 0.9 };
+      spinner.add(sp); sparks.push(sp);
+    }
+    return {
+      t, mesh, spinner, group, sparks,
+      row: new THREE.Vector3(), rowScale: 0.3, fit: { marquise: 0.76, oval: 0.88 }[t.cut] || 1,
+      cur: { x: 0, y: 0, s: 0 }, delay: reduce ? 0 : 0.35 + i * 0.09, placed: false
+    };
+  });
+
+  let vw = 1, vh = 1, mobile = false;
+  const focus = new THREE.Vector3(); let focusScale = 1;
+  const topBar = document.querySelector('.top'), heading = heroEl.querySelector('h1');
+
+  let sizeW = 0, sizeH = 0;
+  function layout() {
+    // the canvas is 100vh tall, so a phone's address bar sliding in and out does not reallocate it
+    const w = canvas.clientWidth || window.innerWidth, h = canvas.clientHeight || window.innerHeight;
+    if (w !== sizeW || h !== sizeH) { renderer.setSize(w, h, false); sizeW = w; sizeH = h; }
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+    vh = 2 * Math.tan(THREE.MathUtils.degToRad(15)) * 10;
+    vw = vh * camera.aspect;
+    mobile = w < 1000;
+    const stacked = mobile && w < h * 1.15;
+    // the stones live in the free band between the top bar and the headline, measured on the page
+    const unit = h / vh, toY = p => (0.5 - p / h) * vh, sy = window.scrollY;
+    const bandTop = topBar.getBoundingClientRect().bottom + sy + 14;
+    const bandBottom = heading.getBoundingClientRect().top + sy - 26;
+    const n = gems.length;
+    // the stones for the West stand apart from the main row
+    const west = gems.filter(g => g.t.group === 'west').length, mainN = n - west;
+    if (!stacked) {
+      const spacing = Math.min(vw * 0.078, 0.95), gap = west ? spacing * 0.9 : 0;
+      const span = spacing * (n - 1) + gap, x0 = -span / 2, arc = vh * 0.035;
+      let scale = spacing * 0.44;
+      const room = bandBottom - bandTop - arc * unit;
+      if (scale * 1.7 * unit > room) scale = Math.max(room, 0) / (1.7 * unit);
+      const half = scale * 0.85 * unit;
+      const cy = Math.max(bandTop + arc * unit + half, Math.min(h * 0.39, bandBottom - half));
+      gems.forEach((g, i) => {
+        const x = x0 + i * spacing + (i >= mainN ? gap : 0);
+        g.row.set(x, toY(cy) + Math.sin((Math.min(i, mainN - 1) / (mainN - 1)) * Math.PI) * arc, 0);
+        g.rowScale = scale * g.fit;
+      });
+    } else {
+      // five and five, the West stone alone under them
+      const per = 5, spacing = Math.min(vw * 0.19, 1.0), x0 = -spacing * (per - 1) / 2;
+      const rows = Math.ceil(mainN / per) + (west ? 1 : 0), apart = west ? 8 : 0;
+      const need = s => s * 1.7 * unit * rows + 18 * (rows - 1) + apart;
+      let scale = spacing * 0.33;
+      if (need(scale) > bandBottom - bandTop) scale *= Math.max(0.6, (bandBottom - bandTop) / need(scale));
+      const pitch = scale * 1.7 * unit + 18, last = bandBottom - scale * 0.85 * unit;
+      gems.forEach((g, i) => {
+        g.rowScale = scale * g.fit;
+        if (i >= mainN) { g.row.set(0, toY(last), 0); return; }
+        const r = Math.floor(i / per), c = i % per;
+        g.row.set(x0 + c * spacing, toY(last - apart - pitch * (rows - 1 - r)), 0);
+      });
+    }
+    focus.set(-vw * 0.29, -vh * 0.03, 0);
+    focusScale = Math.min(vh * 0.17, vw * 0.11);
+    const dist = 13, bh = 2 * Math.tan(THREE.MathUtils.degToRad(15)) * dist;
+    back.scale.set(bh * camera.aspect * 1.15, bh * 1.15, 1);
+    gems.forEach(g => {
+      if (!g.placed) { g.cur.x = g.row.x; g.cur.y = g.row.y + (reduce ? 0 : 0.7); g.placed = true; }
+    });
+  }
+  layout();
+  // a re-layout can clear the canvas, so draw again even if the loop is asleep
+  const relayout = () => { layout(); start(); };
+  window.addEventListener('resize', relayout);
+  if (document.fonts) document.fonts.ready.then(relayout);
+
+  /* pointer: hover a stone, click to open its certificate */
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(9, 9);
+  let hover = -1, shownHover = -1, px = 0, py = 0, mode = 'row';
+  window.addEventListener('pointermove', e => {
+    ndc.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+    px = ndc.x; py = ndc.y;
+  }, { passive: true });
+  window.addEventListener('click', e => {
+    if (mode !== 'row' || hover < 0) return;
+    if (e.target.closest('a, button, summary, input, code')) return;
+    const el = document.getElementById('t-' + gems[hover].t.id);
+    if (el) el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  });
+
+  function computeMode() {
+    const H = window.innerHeight;
+    if (mobile) return heroEl.getBoundingClientRect().bottom > H * 0.3 ? 'row' : 'off';
+    const tr = toolsEl.getBoundingClientRect();
+    if (tr.top > H * 0.62) return 'row';
+    if (tr.bottom > H * 0.55) return 'focus';
+    return 'off';
+  }
+
+  const proj = new THREE.Vector3();
+  let last = performance.now(), time = 0, raf = 0, backLevel = 1, running = false, skip = false;
+
+  function frame(now) {
+    if (lite && (skip = !skip)) { raf = requestAnimationFrame(frame); return; }   // weak phones draw every other frame
+    const dt = Math.min((now - last) / 1000, 0.05); last = now; time += dt;
+    mode = computeMode();
+    const active = Math.max(0, Math.min(gems.length - 1, window.__activeTool || 0));
+    const H = window.innerHeight;
+    const parY = mode === 'row' ? Math.min(window.scrollY / H, 1.2) * vh * 0.28 : 0;
+
+    hover = -1;
+    if (mode === 'row' && !mobile) {
+      ray.setFromCamera(ndc, camera);
+      const hit = ray.intersectObjects(gems.map(g => g.mesh), false)[0];
+      if (hit) hover = hit.object.userData.index;
+    }
+    if (hover !== shownHover) document.body.style.cursor = hover >= 0 ? 'pointer' : '';
+
+    const k = reduce ? 1 : 1 - Math.exp(-dt * (mode === 'off' ? 10 : 5.5));
+    gems.forEach((g, i) => {
+      let tx = g.row.x, ty = g.row.y + parY, ts = g.rowScale;
+      if (mode === 'row') {
+        if (i === hover) { ty += 0.14; ts *= 1.15; }
+      } else if (mode === 'focus') {
+        if (i === active) { tx = focus.x; ty = focus.y; ts = focusScale; } else ts = 0;
+      } else ts = 0;
+      if (time < g.delay) ts = 0;
+      g.cur.x += (tx - g.cur.x) * k;
+      g.cur.y += (ty - g.cur.y) * k;
+      g.cur.s += (ts - g.cur.s) * k;
+      g.group.position.set(g.cur.x, g.cur.y, 0);
+      g.group.scale.setScalar(Math.max(g.cur.s, 0.0001));
+      g.group.visible = g.cur.s > 0.003;
+      if (!reduce) g.spinner.rotation.y += dt * (mode === 'focus' && i === active ? 0.5 : 0.28);
+      g.sparks.forEach(sp => {
+        const v = reduce ? 0.35 : Math.pow(Math.max(0, Math.sin(time * sp.userData.speed + sp.userData.phase)), 14);
+        sp.material.opacity = v;
+        sp.scale.setScalar(0.12 + v * 0.75);
+      });
+    });
+
+    const backTarget = mode === 'row' ? 1 : mode === 'focus' ? 0.8 : 0.45;
+    backLevel += (backTarget - backLevel) * (reduce ? 1 : 1 - Math.exp(-dt * 2.5));
+    backMat.color.setScalar(backLevel);
+
+    const tiltTarget = mode === 'row' && !mobile && !reduce ? px * 0.1 : 0;
+    scene.rotation.y += (tiltTarget - scene.rotation.y) * k;
+
+    if (hover >= 0) {
+      const g = gems[hover];
+      proj.set(g.cur.x, g.cur.y + g.cur.s * 0.95, 0).project(camera);
+      tag.style.left = ((proj.x + 1) / 2 * window.innerWidth) + 'px';
+      tag.style.top = ((1 - proj.y) / 2 * window.innerHeight - 10) + 'px';
+      if (hover !== shownHover) {
+        tag.querySelector('b').textContent = g.t.name;
+        tag.querySelector('span').textContent = g.t.stone;
+        tag.classList.add('on');
+      }
+    } else if (shownHover >= 0) tag.classList.remove('on');
+    shownHover = hover;
+
+    renderer.render(scene, camera);
+    // stones gone and velvet dimmed: nothing moves, so stop drawing until the page scrolls back to them
+    if (mode === 'off' && Math.abs(backLevel - 0.45) < 0.005 && gems.every(g => g.cur.s < 0.003)) { running = false; return; }
+    raf = requestAnimationFrame(frame);
+  }
+  function start() {
+    if (running) return;
+    running = true; last = performance.now(); raf = requestAnimationFrame(frame);
+  }
+  start();
+  window.addEventListener('scroll', () => { if (!running && computeMode() !== 'off') start(); }, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { cancelAnimationFrame(raf); running = false; } else start();
+  });
+}
+</script>
+<script>
+(function () {
+  var KEY = 'mastodont_karta_open';
+  var HOOK = 'https://hook.neverminder.site/webhook/karta-email';
+  var gate = document.getElementById('gate'), form = document.getElementById('gate-f'), err = form.querySelector('.gate-err');
+  var opened = false;
+  try { opened = localStorage.getItem(KEY) === '1'; } catch (e) {}
+  if (opened) return;
+  gate.hidden = false;
+  document.documentElement.classList.add('gate-on');
+  var fix = { 'gmail.con': 'gmail.com', 'gmai.com': 'gmail.com', 'gmial.com': 'gmail.com', 'gamil.com': 'gmail.com', 'gmail.ru': 'gmail.com', 'gmail.co': 'gmail.com', 'mail.ry': 'mail.ru', 'yandex,ru': 'yandex.ru', 'yandex.r': 'yandex.ru' };
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var email = form.email.value.trim().toLowerCase().replace(/\s+/g, '');
+    var parts = email.split('@');
+    if (parts[1] && fix[parts[1]]) email = parts[0] + '@' + fix[parts[1]];
+    if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,}$/.test(email)) { err.textContent = 'Проверь почту: похоже, в ней опечатка'; return; }
+    try { fetch(HOOK, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ email: email, website: form.website.value }) }); } catch (e) {}
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+    gate.hidden = true;
+    document.documentElement.classList.remove('gate-on');
+  });
+})();
+</script>
+</body>
+</html>
