@@ -430,7 +430,7 @@ html.gate-on, html.gate-on body { overflow: hidden; }
           <p class="lead">Двадцать пять сфер. К каждой: почему там платят, где искать этих людей и чем зацепить с первого сообщения.</p>
           <div class="regions">
             <p><span class="tag">Россия и СНГ</span>Места поиска ниже - для них: 2ГИС, Яндекс Карты, Авито, чаты в Телеграме.</p>
-            <p><span class="tag out">Запад</span>Те же сферы ищутся в Google Maps, LinkedIn и на Upwork. Находить там людей помогает <a href="#t-outfind">OpenOutFind</a> из витрины.</p>
+            <p><span class="tag out">Запад</span>Те же сферы ищутся в Google Maps, LinkedIn и на Upwork. Находить там людей помогает <a href="#t-outfind">OpenOutreach</a> из витрины.</p>
           </div>
           <div class="filters" id="filters" role="group" aria-label="Сферы"></div>
           <div class="niches" id="niches"></div>
@@ -473,61 +473,61 @@ html.gate-on, html.gate-on body { overflow: hidden; }
 
   var TOOLS = [
     { id: 'ecc', group: 'base', name: 'ECC', stone: 'гранат', color: '#9E1B3B', ior: 1.76, cut: 'round',
-      repo: 'affaan-m/ECC', stars: 285999, license: 'MIT',
+      repo: 'affaan-m/ECC', stars: 296092, license: 'MIT',
       what: 'Система, которая прокачивает Claude Code и других агентов: проверенные скиллы, полезные привычки, память между сессиями и защита от опасных действий.',
       pays: 'Сам ничего не продаёт. Делает быстрее и надёжнее любой заказ из витрины, поэтому ставится первым.',
       phrase: 'Склонируй github.com/affaan-m/ECC и установи его по инструкции из README в мой Claude Code. Потом коротко расскажи, что изменилось.' },
     { id: 'pocock', group: 'base', name: 'Скиллы Мэтта Покока', stone: 'перидот', color: '#8DC63F', ior: 1.68, cut: 'cushion',
-      repo: 'mattpocock/skills', stars: 300263, license: 'MIT',
+      repo: 'mattpocock/skills', stars: 310797, license: 'MIT',
       what: 'Набор скиллов от известного разработчика Мэтта Покока. Claude сначала задаёт правильные вопросы и составляет план, а уже потом делает.',
       pays: 'Меньше переделок в любом заказе: клиент получает то, что просил, с первого раза.',
       phrase: 'Установи скиллы из github.com/mattpocock/skills в мой Claude Code по инструкции из README и покажи список того, что появилось.' },
     { id: 'uiux', group: 'work', name: 'UI UX Pro Max', stone: 'сапфир', color: '#2C5BE8', ior: 1.77, cut: 'round',
-      repo: 'nextlevelbuilder/ui-ux-pro-max-skill', stars: 138693, license: 'MIT',
+      repo: 'nextlevelbuilder/ui-ux-pro-max-skill', stars: 144557, license: 'MIT',
       what: 'Скилл с дизайнерскими знаниями: стили, палитры, шрифты и правила интерфейсов. Claude собирает сайт уровня студии, а не шаблон.',
       pays: 'Сайты для бизнеса: лендинг под одну услугу, сайт-визитка, переделка старого сайта.',
       phrase: 'Установи скилл из github.com/nextlevelbuilder/ui-ux-pro-max-skill в мой Claude Code по инструкции из README. Потом собери с ним первый экран сайта для стоматологии.' },
     { id: 'shaders', group: 'work', name: 'Shaders', stone: 'аметист', color: '#8E4FE6', ior: 1.55, cut: 'marquise',
-      repo: 'shader-effects-inc/shaders', stars: 5304, license: 'MIT',
+      repo: 'shader-effects-inc/shaders', stars: 5811, license: 'MIT',
       what: 'Готовые живые эффекты для сайтов на WebGPU: переливы, свечение, движение фона. Подключаются к React, Vue, Svelte и Framer.',
       pays: 'Вау-сайты, которые стоят дороже обычных: первый экран, который запоминают.',
       phrase: 'Подключи эффекты из github.com/shader-effects-inc/shaders к моему сайту по инструкции из README и покажи три варианта первого экрана.' },
     { id: 'hyperframes', group: 'work', name: 'Hyperframes', stone: 'рубин', color: '#D1173F', ior: 1.77, cut: 'oval',
-      repo: 'heygen-com/hyperframes', stars: 69538, license: 'Apache-2.0',
+      repo: 'heygen-com/hyperframes', stars: 78050, license: 'Apache-2.0',
       what: 'Инструмент от HeyGen: агент пишет страницу, а Hyperframes превращает её в видео. Ролик собирается кодом, без монтажной программы.',
       pays: 'Видео и реклама нейросетями: промо, ролики для соцсетей, анимированные объявления.',
       phrase: 'Установи github.com/heygen-com/hyperframes по инструкции из README и сделай 15-секундный рекламный ролик для кофейни.' },
     { id: 'voice', group: 'work', name: 'VoiceStudio', stone: 'цитрин', color: '#F2B21B', ior: 1.55, cut: 'cushion',
-      repo: 'debpalash/VoiceStudio', stars: 80950, license: 'AGPL-3.0',
+      repo: 'debpalash/VoiceStudio', stars: 99619, license: 'AGPL-3.0',
       what: 'Бесплатная замена ElevenLabs, которая работает на твоём компьютере: клонирование голоса, дизайн голоса, дубляж видео.',
       pays: 'Озвучка роликов и дубляж на другие языки.',
       phrase: 'Установи github.com/debpalash/VoiceStudio на мой компьютер по инструкции из README и озвучь тестовый абзац двумя разными голосами.' },
     { id: 'marketing', group: 'work', name: 'Marketing Skills', stone: 'изумруд', color: '#11A06A', ior: 1.58, cut: 'princess',
-      repo: 'coreyhaines31/marketingskills', stars: 55902, license: 'MIT',
+      repo: 'coreyhaines31/marketingskills', stars: 58206, license: 'MIT',
       what: 'Скиллы для маркетинга: продающие тексты, конверсия страниц, SEO, аналитика и рост.',
       pays: 'Тексты на потоке, SEO и попадание клиента в ответы нейросетей.',
       phrase: 'Установи скиллы из github.com/coreyhaines31/marketingskills в мой Claude Code по инструкции из README и разбери тексты на сайте моего клиента.' },
     { id: 'archify', group: 'work', name: 'Archify', stone: 'аквамарин', color: '#34C2DB', ior: 1.58, cut: 'oval',
-      repo: 'tt-a1i/archify', stars: 87307, license: 'MIT',
+      repo: 'tt-a1i/archify', stars: 92977, license: 'Apache-2.0',
       what: 'Превращает любую идею, план или код в красивую интерактивную схему одной командой.',
       pays: 'Разбор процессов: показать владельцу на схеме, где компания теряет деньги.',
       phrase: 'Установи скилл из github.com/tt-a1i/archify в мой Claude Code по инструкции из README и нарисуй схему того, как в салоне красоты обрабатывают заявки.' },
     { id: 'diagram', group: 'work', name: 'Diagram Design', stone: 'топаз', color: '#E87A2C', ior: 1.62, cut: 'marquise',
-      repo: 'cathrynlavery/diagram-design', stars: 59759, license: 'MIT',
+      repo: 'cathrynlavery/diagram-design', stars: 64527, license: 'MIT',
       what: 'Скилл для аккуратных диаграмм в журнальном стиле: 45 типов схем для отчётов и презентаций.',
       pays: 'Схемы для коммерческих предложений, отчётов и разборов процессов.',
       phrase: 'Установи скилл из github.com/cathrynlavery/diagram-design в мой Claude Code по инструкции из README и сделай схему коммерческого предложения на одну страницу.' },
     { id: 'rea', group: 'work', name: 'REA', stone: 'бриллиант', color: '#E4ECF7', ior: 2.42, cut: 'round',
-      repo: 'morluto/rea', stars: 361149, license: 'MIT',
+      repo: 'morluto/rea', stars: 425052, license: 'MIT',
       what: 'Разбирает любое приложение агентами: от того, как программа себя ведёт, до её внутренностей. Самый звёздный репозиторий витрины.',
       pays: 'Клон нужной программы для клиента или разбор чужого сервиса, чтобы сделать свой.',
       phrase: 'Подключи github.com/morluto/rea к моему Claude Code по инструкции из README и разбери, как устроено приложение, которое я назову.' },
-    { id: 'outfind', group: 'west', name: 'OpenOutFind', stone: 'турмалин', color: '#E0507A', ior: 1.62, cut: 'oval',
-      repo: 'eracle/OpenOutFind', stars: 21, license: 'GPL-3.0',
-      what: 'Ищет клиентов под описание твоего продукта: находит подходящих людей в LinkedIn через лицензированную базу и пишет, почему подходит каждый. На выходе таблица, по которой можно делать рассылку.',
+    { id: 'outfind', group: 'west', name: 'OpenOutreach', stone: 'турмалин', color: '#E0507A', ior: 1.62, cut: 'oval',
+      repo: 'eracle/OpenOutreach', stars: 3484, license: 'GPL-3.0',
+      what: 'Ищет клиентов под описание твоего продукта: находит подходящих людей через лицензированную базу, пишет, почему подходит каждый, и сам отправляет им письмо с твоей почты.',
       pays: 'Это не услуга на продажу, а поиск клиентов для тебя самого. Подходит для западного B2B: LinkedIn в России заблокирован, а местных компаний из 2ГИС он не знает.',
-      note: 'Ранняя версия: 21 звезда на GitHub. Поиск по базе бесплатный, а почты людей находятся за отдельные деньги у поставщика данных. У автора есть готовый сервис openoutreach.app: 10 подходящих профилей бесплатно, дальше 2 доллара за контакт.',
-      phrase: 'Установи github.com/eracle/OpenOutFind по инструкции из README. Потом спроси меня, что я продаю и кому, и найди 10 подходящих людей.' }
+      note: 'Поиск подходящих людей бесплатный, а рабочие почты для писем покупаются за кредиты. У автора есть готовый сервис openoutreach.app: 10 подходящих профилей бесплатно, дальше 2 доллара за контакт.',
+      phrase: 'Установи github.com/eracle/OpenOutreach по инструкции из README. Потом спроси меня, что я продаю и кому, и найди 10 подходящих людей.' }
   ];
 
   var LICENSES = {
@@ -610,7 +610,7 @@ html.gate-on, html.gate-on body { overflow: hidden; }
       RU + '<b>Вакансии:</b> hh.ru, Авито Работа. Компания ищет маркетолога на зарплату - значит, деньги на эту задачу уже выделены, и их больше, чем ты попросишь за разовую работу',
       ANY + '<b>Чаты по твоей теме в Телеграме.</b> Там люди вслух проговаривают проблему ещё до того, как начнут искать исполнителя',
       ANY + '<b>Партнёры:</b> таргетологи, продюсеры, агентства. У них уже есть клиенты, а у клиентов задачи, которые сами они не делают',
-      OUT + 'Если ты не в России, к этому добавляются <b>Upwork</b> и <b>LinkedIn</b> - там платят в валюте. В России они недоступны. Искать людей в LinkedIn помогает <a href="#t-outfind">OpenOutFind</a> из витрины',
+      OUT + 'Если ты не в России, к этому добавляются <b>Upwork</b> и <b>LinkedIn</b> - там платят в валюте. В России они недоступны. Искать людей в LinkedIn помогает <a href="#t-outfind">OpenOutreach</a> из витрины',
       'Возьми <b>одно</b> место на первый месяц. Схватишься за все сразу - не доведёшь ни одно'] },
     { t: 'Первое сообщение', s: 'Не «здравствуйте, я делаю сайты, вам актуально?».', d: [
       'Работает только одно: <b>ты уже что-то для них сделал</b>. Не предлагаешь, а показываешь',
